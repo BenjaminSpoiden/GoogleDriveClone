@@ -23,6 +23,7 @@ const Signup = () => {
         if(password !== confirmPassword) return
         onSignUp(email, password)
     }
+    
     return (
         <Container minH="100vh" >
             <DarkModeSwitch />
