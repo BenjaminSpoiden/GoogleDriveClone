@@ -4,7 +4,6 @@ import { Container } from "../components/Container"
 import { DarkModeSwitch } from "../components/DarkModeSwitch"
 import { InputField } from "../components/InputField"
 import { Wrapper } from "../components/Wrapper"
-import { sleep } from "../utils/sleep"
 import NextLink from "next/link"
 
 const Login = () => {
@@ -15,22 +14,13 @@ const Login = () => {
                 <Flex p={4} flexDir="column" m="auto" w="100%" >
                     <Heading size="lg" colorScheme="gray" textTransform="uppercase" >Login</Heading>
                     <Formik 
-                        initialValues={{username: "", email: "", password: ""}}
+                        initialValues={{email: "", password: ""}}
                         onSubmit={async (values) => {
-                            await sleep(2000)
-                            console.log(values)
+                            
                         }}
                     >
                         {({isSubmitting}) => (
                             <Form>
-                                <InputField
-                                    name="username"
-                                    placeholder="Enter your username"
-                                    label="Username"
-                                    variant="flushed"
-                                    m="auto"
-                                />
-
                                 <InputField
                                     name="email"
                                     placeholder="Enter your email"
@@ -54,7 +44,7 @@ const Login = () => {
                     </Formik>
                     <NextLink href="/login">
                         <Text fontStyle="italic" m="auto" mt={4} color="blue.300" cursor="pointer" _hover={{textDecoration: "underline"}} >
-                            
+                            Doesn't have an account yet ? Sign up
                         </Text>   
                     </NextLink>   
                 </Flex>
