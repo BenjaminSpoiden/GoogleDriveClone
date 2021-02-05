@@ -1,28 +1,25 @@
 import { Flex, Heading, Button, Text } from "@chakra-ui/react"
 import { Formik, Form } from "formik"
-import React, { useState } from "react"
+import React from "react"
 import { Container } from "../components/Container"
 import { DarkModeSwitch } from "../components/DarkModeSwitch"
 import { InputField } from "../components/InputField"
 import { Wrapper } from "../components/Wrapper"
 import NextLink from "next/link"
-import { onSignUp } from "../firebase/AuthFunctions"
+import { onSignOut, onSignUp } from "../firebase/AuthFunctions"
 import * as yup from "yup"
-import { sleep } from "../utils/sleep"
+import { useAuth } from "../hooks/useAuth"
 
 
 const Signup = () => {
 
     const SignupValidationSchema = yup.object().shape({
         email: yup.string().email("Invalid email.").required("The email is required."),
-        password: yup.string().required("The password is required."),
+        password: yup.string().min(8, "The password must be atleast 8 characters long.").required("The password is required."),
         confirmPassword: yup.string().oneOf([yup.ref("password"), null], "Passwords did not match.")
     })
 
-    const handleOnSignUp = (email: string, password: string, confirmPassword: string) => {
-        if(password !== confirmPassword) return
-        onSignUp(email, password)
-    }
+    
     return (
         <Container minH="100vh" >
             <DarkModeSwitch />
@@ -33,8 +30,8 @@ const Signup = () => {
                         initialValues={{email: "", password: "", confirmPassword: ""}}
                         validationSchema={SignupValidationSchema}
                         onSubmit={async (values) => {
-                            await sleep(2000)
-                            console.log(values)
+                            const { email, password } = values
+                            await onSignUp(email, password)
                         }}
                     >
                         {({isSubmitting}) => (
