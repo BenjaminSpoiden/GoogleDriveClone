@@ -6,20 +6,12 @@ import { DarkModeSwitch } from "../components/DarkModeSwitch"
 import { InputField } from "../components/InputField"
 import { Wrapper } from "../components/Wrapper"
 import NextLink from "next/link"
-import { onSignOut, onSignUp } from "../firebase/AuthFunctions"
-import * as yup from "yup"
-import { useAuth } from "../hooks/useAuth"
+import { onSignUp } from "../firebase/AuthFunctions"
+import { SignupValidationSchema } from "../utils/SchemaValidator"
 
 
 const Signup = () => {
 
-    const SignupValidationSchema = yup.object().shape({
-        email: yup.string().email("Invalid email.").required("The email is required."),
-        password: yup.string().min(8, "The password must be atleast 8 characters long.").required("The password is required."),
-        confirmPassword: yup.string().oneOf([yup.ref("password"), null], "Passwords did not match.")
-    })
-
-    
     return (
         <Container minH="100vh" >
             <DarkModeSwitch />
@@ -48,6 +40,7 @@ const Signup = () => {
                                     placeholder="Enter your password"
                                     label="Password"
                                     variant="flushed"
+                                    type="password"
                                 />
 
                                 <InputField
@@ -55,6 +48,7 @@ const Signup = () => {
                                     placeholder="Please confirm your password"
                                     label="Confirm Password"
                                     variant="flushed"
+                                    type="password"
                                 />
 
                                 <Button w="100%" type="submit" isLoading={isSubmitting} mt={8} colorScheme="whatsapp" >
