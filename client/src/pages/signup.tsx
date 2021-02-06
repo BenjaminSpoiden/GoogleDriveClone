@@ -40,6 +40,7 @@ const Signup = () => {
                                     placeholder="Enter your password"
                                     label="Password"
                                     variant="flushed"
+                                    type="password"
                                 />
 
                                 <InputField
@@ -47,6 +48,7 @@ const Signup = () => {
                                     placeholder="Please confirm your password"
                                     label="Confirm Password"
                                     variant="flushed"
+                                    type="password"
                                 />
 
                                 <Button w="100%" type="submit" isLoading={isSubmitting} mt={8} colorScheme="whatsapp" >

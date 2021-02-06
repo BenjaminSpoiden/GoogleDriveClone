@@ -53,6 +53,7 @@ const Login = () => {
                                     placeholder="Enter your password"
                                     label="Password"
                                     variant="flushed"
+                                    type="password"
                                 />
 
                                 <Button w="100%" type="submit" isLoading={isSubmitting} mt={8} colorScheme="whatsapp" >
