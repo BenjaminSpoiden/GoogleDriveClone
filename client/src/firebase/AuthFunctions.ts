@@ -11,3 +11,7 @@ export const onSignIn = async(email: string, password: string) => {
 export const onSignOut = async () => {
     return await auth.signOut()
 }
+
+export const onResetPassword = async (email: string) => {
+    return await auth.sendPasswordResetEmail(email)
+}

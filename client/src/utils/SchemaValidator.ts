@@ -10,3 +10,7 @@ export const LoginValidationSchema = yup.object().shape({
     email: yup.string().email("Invalid email.").required("The email is required."),
     password: yup.string().min(8, "The password must be atleast 8 characters.").required("The Password is required")
 })
+
+export const ResetPasswordValidationSchema = yup.object().shape({
+    email: yup.string().email("Invalid email.").required("The email is required")
+})

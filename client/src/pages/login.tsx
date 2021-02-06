@@ -67,7 +67,12 @@ const Login = () => {
                         <Text fontStyle="italic" m="auto" mt={4} color="blue.300" cursor="pointer" _hover={{textDecoration: "underline"}} >
                             Doesn't have an account yet ? Sign up
                         </Text>   
-                    </NextLink>   
+                    </NextLink>  
+                    <NextLink href="/forgot-password"> 
+                        <Text fontStyle="italic" m="auto" mt={4} color="blue.300" cursor="pointer" _hover={{textDecoration: "underline"}} >
+                            Forgot your password ? Click here
+                        </Text> 
+                    </NextLink> 
                 </Flex>
             </Wrapper>
         </Container>
