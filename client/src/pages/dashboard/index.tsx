@@ -1,3 +1,4 @@
+import { AddFolder } from "../../components/AddFolder"
 import { Container } from "../../components/Container"
 import { Navbar } from "../../components/Navbar"
 import { useIsAuth } from "../../hooks/useIsAuth"
@@ -9,7 +10,7 @@ const Dashboard = () => {
     return (
         <Container minH="100vh">
             <Navbar />
-            <pre>{JSON.stringify(user?.uid, null, 2)}</pre>
+            <AddFolder />
         </Container>
     )
 }
