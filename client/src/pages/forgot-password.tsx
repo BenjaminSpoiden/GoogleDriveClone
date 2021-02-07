@@ -5,7 +5,7 @@ import { Container } from "../components/Container"
 import { DarkModeSwitch } from "../components/DarkModeSwitch"
 import { InputField } from "../components/InputField"
 import { Wrapper } from "../components/Wrapper"
-import { onResetPassword } from "../firebase/AuthFunctions"
+import { onSendResetPasswordEmail } from "../firebase/AuthFunctions"
 import { ResetPasswordValidationSchema } from "../utils/SchemaValidator"
 
 const ForgotPassword = () => {
@@ -21,7 +21,7 @@ const ForgotPassword = () => {
                         onSubmit={async (values, { setErrors }) => {
                             const { email } = values
                             try {
-                                await onResetPassword(email)
+                                await onSendResetPasswordEmail(email)
                             }catch(e) {
                                 if(e.code === "auth/user-not-found") {
                                     setErrors({

@@ -18,7 +18,7 @@ const Dashboard = () => {
     return (
         <Container minH="100vh">
             <DarkModeSwitch />
-            <pre>{JSON.stringify(user?.email, null, 2)}</pre>
+            <pre>{JSON.stringify(user?.uid, null, 2)}</pre>
         </Container>
     )
 }
