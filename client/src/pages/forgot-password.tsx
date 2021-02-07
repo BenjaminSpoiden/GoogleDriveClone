@@ -1,4 +1,4 @@
-import { Button, Flex, Heading } from "@chakra-ui/react"
+import { Button, Flex, Heading, useToast } from "@chakra-ui/react"
 import { Formik, Form } from "formik"
 import React from "react"
 import { Container } from "../components/Container"
@@ -9,6 +9,9 @@ import { onSendResetPasswordEmail } from "../firebase/AuthFunctions"
 import { ResetPasswordValidationSchema } from "../utils/SchemaValidator"
 
 const ForgotPassword = () => {
+    
+    const toast = useToast()
+
     return (
         <Container minH="100vh">
             <DarkModeSwitch />
@@ -22,6 +25,15 @@ const ForgotPassword = () => {
                             const { email } = values
                             try {
                                 await onSendResetPasswordEmail(email)
+                                toast({
+                                    status: "success",
+                                    title: "Email sent",
+                                    description: "Please check your inbox to access the link.",
+                                    variant: "flushed",
+                                    isClosable: true,
+                                    duration: 2000,
+                                    position: "top"
+                                })
                             }catch(e) {
                                 if(e.code === "auth/user-not-found") {
                                     setErrors({

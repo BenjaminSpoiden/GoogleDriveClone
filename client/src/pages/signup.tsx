@@ -1,4 +1,4 @@
-import { Flex, Heading, Button, Text } from "@chakra-ui/react"
+import { Flex, Heading, Button, Text, useToast } from "@chakra-ui/react"
 import { Formik, Form } from "formik"
 import React from "react"
 import { Container } from "../components/Container"
@@ -8,10 +8,13 @@ import { Wrapper } from "../components/Wrapper"
 import NextLink from "next/link"
 import { onSignUp } from "../firebase/AuthFunctions"
 import { SignupValidationSchema } from "../utils/SchemaValidator"
+import { useRouter } from "next/dist/client/router"
 
 
 const Signup = () => {
 
+    const {push} = useRouter()
+    const toast = useToast()
     return (
         <Container minH="100vh" >
             <DarkModeSwitch />
@@ -24,6 +27,15 @@ const Signup = () => {
                         onSubmit={async (values) => {
                             const { email, password } = values
                             await onSignUp(email, password)
+                            push("/dashboard")
+                            toast({
+                                title: "Signed up",
+                                description: "Thank you for registering, your are now redirected to the dashboard",
+                                variant: "flushed",
+                                duration: 2000,
+                                isClosable: true,
+                                position: "top"
+                            })
                         }}
                     >
                         {({isSubmitting}) => (

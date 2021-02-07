@@ -1,4 +1,4 @@
-import { Flex, Heading, Button } from "@chakra-ui/react"
+import { Flex, Heading, Button, useToast } from "@chakra-ui/react"
 import { Formik, Form } from "formik"
 import { useRouter } from "next/dist/client/router"
 import React from "react"
@@ -12,6 +12,7 @@ import { ChangePasswordValidationSchema } from "../utils/SchemaValidator"
 const ResetPassword = () => {
 
     const router = useRouter()
+    const toast = useToast()
 
     return (
         <Container minH="100vh">
@@ -26,6 +27,16 @@ const ResetPassword = () => {
                             const { password } = values
                             try {
                                 await onResetPassword(router.query.oobCode as string, password)
+                                router.push("/login")
+                                toast({
+                                    status: "success",
+                                    title: "Password reset",
+                                    description: "Your password has been succesfully reset, you now be redirected to the dashboard.",
+                                    variant: "flushed",
+                                    isClosable: true,
+                                    duration: 2000,
+                                    position: "top"
+                                })
                             }
                             catch(e) {
                                 if(e.code === "auth/invalid-action-code") {
