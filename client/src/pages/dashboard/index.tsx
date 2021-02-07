@@ -1,6 +1,7 @@
-import { Heading } from "@chakra-ui/react"
 import { useRouter } from "next/dist/client/router"
 import { useEffect } from "react"
+import { Container } from "../../components/Container"
+import { DarkModeSwitch } from "../../components/DarkModeSwitch"
 import { useAuth } from "../../hooks/useAuth"
 
 const Dashboard = () => {
@@ -15,9 +16,10 @@ const Dashboard = () => {
     }, [user, loading])
 
     return (
-        <Heading>
-            USERS ONLY
-        </Heading>
+        <Container minH="100vh">
+            <DarkModeSwitch />
+            <pre>{JSON.stringify(user?.uid, null, 2)}</pre>
+        </Container>
     )
 }
 
