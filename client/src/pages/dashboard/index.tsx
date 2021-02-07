@@ -6,7 +6,6 @@ const Dashboard = () => {
 
     const { user } = useIsAuth()
 
-    console.log(user?.getIdToken())
     return (
         <Container minH="100vh">
             <Navbar />
