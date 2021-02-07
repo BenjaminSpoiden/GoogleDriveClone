@@ -1,20 +1,12 @@
-import { useRouter } from "next/dist/client/router"
-import { useEffect } from "react"
 import { Container } from "../../components/Container"
 import { DarkModeSwitch } from "../../components/DarkModeSwitch"
-import { useAuth } from "../../hooks/useAuth"
+import { useIsAuth } from "../../hooks/useIsAuth"
 
 const Dashboard = () => {
 
-    const router = useRouter()
-    const { user, loading } = useAuth()
+    const { user } = useIsAuth()
 
-    useEffect(() => {
-        if(!user && !loading) {
-            router.replace("/")
-        }
-    }, [user, loading])
-
+    console.log(user?.getIdToken())
     return (
         <Container minH="100vh">
             <DarkModeSwitch />
