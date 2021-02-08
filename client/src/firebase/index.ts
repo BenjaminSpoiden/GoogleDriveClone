@@ -9,7 +9,13 @@ const firestore = firebase.firestore()
 export const db = {
     folders: firestore.collection('folders'),
     files: firestore.collection('files'),
-    getCurentTimestamp: firebase.firestore.FieldValue.serverTimestamp()
+    getCurentTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    formatDocument: (doc: any) => {
+        return {
+            id: doc.id,
+            ...doc.data()
+        }
+    }
 }
 
 export const auth = firebase.auth()

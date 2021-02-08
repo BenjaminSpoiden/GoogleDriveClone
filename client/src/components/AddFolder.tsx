@@ -5,7 +5,12 @@ import { db } from "../firebase"
 import { addNewFolder } from "../firebase/FolderFunctions"
 import { useIsAuth } from "../hooks/useIsAuth"
 
-export const AddFolder = () => {
+interface AddFolderProps {
+    currentFolder: any
+}
+
+
+export const AddFolder = ({ currentFolder }: AddFolderProps) => {
     
     const { isOpen, onClose, onOpen } = useDisclosure()
     const [folderName, setFolderName] = useState("")
@@ -16,6 +21,7 @@ export const AddFolder = () => {
         await addNewFolder({
             name,
             uid,
+            parentId: currentFolder.id,
             createdAt: db.getCurentTimestamp
         })
     }
