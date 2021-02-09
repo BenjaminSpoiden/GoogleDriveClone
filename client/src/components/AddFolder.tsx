@@ -1,12 +1,11 @@
 import { Button, Flex, IconButton, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { useState } from "react"
 import { MdCreateNewFolder } from "react-icons/md"
-import { db } from "../firebase"
 import { addNewFolder } from "../firebase/FolderFunctions"
 import { useIsAuth } from "../hooks/useIsAuth"
 
 interface AddFolderProps {
-    currentFolder: any
+    currentFolder: any | null
 }
 
 
@@ -16,14 +15,19 @@ export const AddFolder = ({ currentFolder }: AddFolderProps) => {
     const [folderName, setFolderName] = useState("")
     const { user } = useIsAuth()
 
+    console.log(currentFolder)
+
     const addFolder = async (name: string, uid: string) => {
 
+        
         await addNewFolder({
             name,
             uid,
+            path: null,
             parentId: currentFolder.id,
-            createdAt: db.getCurentTimestamp
+            createdAt: null
         })
+        onClose()
     }
 
     return (

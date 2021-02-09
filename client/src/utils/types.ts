@@ -6,11 +6,11 @@ export type FirebaseUser = {
 
 
 export type FolderData = {
-    name: string,
-    parentId?: string,
-    uid: string,
-    path?: any[],
-    createdAt?: firebase.firestore.FieldValue
+    name: string | null,
+    parentId: string | null,
+    uid: string | null,
+    path: any[] | null,
+    createdAt: firebase.firestore.FieldValue | null
 } 
 
 // Folder Type 
@@ -34,22 +34,22 @@ export const SET_CHILD_FILES = "set-child-files"
 
 export type SelectFolderAction = {
     type: typeof SELECT_FOLDER
-    payloads: Folder
+    payload: Folder
 }
 
 export interface UpdateFolderAction {
     type: typeof UPDATE_FOLDER
-    payloads: Folder
+    payload: Folder
 }
 
 export interface SetChildFoldersAction {
     type: typeof SET_CHILD_FOLDERS
-    payloads: Folder
+    payload: Folder
 }
 
 export interface SetChildFilesAction {
     type: typeof SET_CHILD_FILES
-    payloads: Folder
+    payload: Folder
 }
 
 export type FolderActionType = SelectFolderAction | UpdateFolderAction | SetChildFoldersAction | SetChildFilesAction

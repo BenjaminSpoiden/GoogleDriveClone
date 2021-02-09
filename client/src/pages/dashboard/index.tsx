@@ -1,25 +1,32 @@
-import { AddFolder } from "../../components/AddFolder"
+import { ChevronRightIcon } from "@chakra-ui/icons"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex } from "@chakra-ui/react"
+import { useRouter } from "next/dist/client/router"
+import React from "react"
+import { AddFile } from "../../components/AddFile"
 import { Container } from "../../components/Container"
-import { Folder } from "../../components/Folder"
 import { Navbar } from "../../components/Navbar"
-import { useFolder } from "../../hooks/useFolder"
 import { useIsAuth } from "../../hooks/useIsAuth"
+
 
 const Dashboard = () => {
 
     const { user } = useIsAuth()
-    const { folder, childFolders } = useFolder("AsHcUCp4N8PshQuxFX5Q")
-    
+    const router = useRouter()
+
     return (
         <Container minH="100vh">
             <Navbar />
-            <AddFolder currentFolder={folder} />
-            { folder && <Folder folder={folder} />}
-            {childFolders.length > 0 && (
-                <div>
-                    {childFolders.map(childFolder => <div>{childFolder.name}</div>)}
-                </div>
-            )}
+            <Flex px={4} w="100%" mx="auto" justify="flex-start" >
+                
+                <AddFile />
+            </Flex>
+            <Flex p={4} w="100%" mx="auto" justify="flex-start" >
+                <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
+                    <BreadcrumbItem isCurrentPage >
+                        <BreadcrumbLink href="#">Root</BreadcrumbLink>
+                    </BreadcrumbItem>
+                </Breadcrumb>
+            </Flex>
         </Container>
     )
 }
