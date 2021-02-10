@@ -16,15 +16,18 @@ export const AddFolder = ({ currentFolder }: AddFolderProps) => {
     const [folderName, setFolderName] = useState("")
     const { user } = useIsAuth()
 
+    console.log("currentFolder: ", currentFolder)
+
     const addFolder = async (name: string, uid: string) => {
-        
+
         await addNewFolder({
             name,
             uid,
             path: null,
-            parentId: currentFolder !== null ? currentFolder.id : null,
+            parentId: currentFolder.id !== undefined ? currentFolder.id : null,
             createdAt: db.getCurentTimestamp 
         })
+        
         onClose()
     }
 

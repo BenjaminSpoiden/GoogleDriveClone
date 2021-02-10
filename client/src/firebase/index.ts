@@ -13,7 +13,7 @@ export const db = {
     formatDocument: (doc: any) => {
         return {
             id: doc.id,
-            ...doc.data()
+            ...doc.data() 
         }
     }
 }

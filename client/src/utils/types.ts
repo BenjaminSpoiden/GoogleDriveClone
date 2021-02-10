@@ -16,7 +16,6 @@ export type FolderData = {
 // Folder Type 
 
 export interface Folder {
-    id: string | null
     folderId: string | null, 
     folder: FolderData | null,
     childFolders: FolderData[] | null,
@@ -57,5 +56,5 @@ export type FolderActionType = SelectFolderAction | UpdateFolderAction | SetChil
 
 
 export interface FolderProps {
-    folder: FolderData
+    item: FolderData | null
 }
