@@ -1,4 +1,4 @@
-import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Avatar, Text, Flex, DrawerHeader, DrawerCloseButton, CloseButton } from "@chakra-ui/react"
+import { Button, Drawer, DrawerBody, DrawerContent, DrawerOverlay, Avatar, Text, Flex, DrawerHeader, CloseButton } from "@chakra-ui/react"
 import React, { MutableRefObject } from "react"
 import { onSignOut } from "../firebase/AuthFunctions"
 import { DarkModeSwitch } from "./DarkModeSwitch"
