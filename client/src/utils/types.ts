@@ -11,15 +11,16 @@ export type FolderData = {
     uid: string | null,
     path: any[] | null,
     createdAt: firebase.firestore.FieldValue | null
-} 
+}
 
 // Folder Type 
 
 export interface Folder {
-    folderId: string, 
-    folder: any,
-    childFolders: any[],
-    childFiles: any[]
+    id: string | null
+    folderId: string | null, 
+    folder: FolderData | null,
+    childFolders: FolderData[] | null,
+    childFiles: any[] | null
 }
 
 export interface FolderState {
@@ -39,17 +40,22 @@ export type SelectFolderAction = {
 
 export interface UpdateFolderAction {
     type: typeof UPDATE_FOLDER
-    payload: Folder
+    payload: Folder 
 }
 
 export interface SetChildFoldersAction {
     type: typeof SET_CHILD_FOLDERS
-    payload: Folder
+    payload: Folder 
 }
 
 export interface SetChildFilesAction {
     type: typeof SET_CHILD_FILES
-    payload: Folder
+    payload: Folder 
 }
 
 export type FolderActionType = SelectFolderAction | UpdateFolderAction | SetChildFoldersAction | SetChildFilesAction
+
+
+export interface FolderProps {
+    folder: FolderData
+}
