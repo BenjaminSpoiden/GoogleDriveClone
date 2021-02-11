@@ -1,4 +1,4 @@
-import { Button, Flex, IconButton, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { Button, Flex, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { useState } from "react"
 import { MdCreateNewFolder } from "react-icons/md"
 import { db } from "../firebase"
@@ -39,13 +39,14 @@ export const AddFolder = ({ currentFolder }: AddFolderProps) => {
 
     return (
         <>
-            <IconButton
+            <Button
                 aria-label="add-folder"
-                children={<MdCreateNewFolder />}
-                fontSize="20px"
+                leftIcon={<MdCreateNewFolder />}
                 colorScheme="whatsapp"
                 onClick={onOpen}
-            />
+            >
+                Add new folder
+            </Button>
 
             <Modal
                 isOpen={isOpen}
@@ -53,7 +54,7 @@ export const AddFolder = ({ currentFolder }: AddFolderProps) => {
                 isCentered
             >
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent mx={4} >
                     <Flex m='auto' w="100%" p={8} flexDir="column" >
                         <Input onChange={(e) => setFolderName(e.target.value)} placeholder="Enter your folder name."/>
                         <Flex mt={8} mx="auto" justify="space-between" w="100%" >

@@ -9,7 +9,10 @@ import { useDisplayFolders } from "../../../hooks/useDisplayFolders"
 const CurrentFolder = () => {
 
     const router = useRouter()
-    const {folder, childFolders} = useDisplayFolders(String(router.query.id), null)
+    const {folder, childFolders, childFiles} = useDisplayFolders(String(router.query.id), null)
+
+    console.log("childFiles", childFiles)
+
     return (
         <>
         {folder && (
