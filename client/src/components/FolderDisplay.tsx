@@ -5,7 +5,6 @@ import { MdFolder } from "react-icons/md"
 
 
 export const FolderDisplay = ({item}: FolderProps) => {
-    // console.log("display: ", item)
     return (
         <LinkBox as="button" >
            {/* @ts-ignore */}

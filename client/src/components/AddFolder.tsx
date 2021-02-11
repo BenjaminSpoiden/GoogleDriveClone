@@ -4,9 +4,10 @@ import { MdCreateNewFolder } from "react-icons/md"
 import { db } from "../firebase"
 import { addNewFolder } from "../firebase/FolderFunctions"
 import { useIsAuth } from "../hooks/useIsAuth"
+import { FolderData, Path, ROOT_FOLDER } from "../utils/types"
 
 interface AddFolderProps {
-    currentFolder: any | null
+    currentFolder: FolderData | null
 }
 
 
@@ -16,14 +17,19 @@ export const AddFolder = ({ currentFolder }: AddFolderProps) => {
     const [folderName, setFolderName] = useState("")
     const { user } = useIsAuth()
 
-    console.log("currentFolder: ", currentFolder)
+    let path: Path[] = currentFolder?.path ? [...currentFolder.path] : []
 
+    if(currentFolder !== ROOT_FOLDER) {
+        //@ts-ignore
+        path.push({ name: currentFolder?.name, id: currentFolder?.id})
+    }
     const addFolder = async (name: string, uid: string) => {
 
         await addNewFolder({
             name,
             uid,
-            path: null,
+            path,
+            //@ts-ignore
             parentId: currentFolder.id !== undefined ? currentFolder.id : null,
             createdAt: db.getCurentTimestamp 
         })
