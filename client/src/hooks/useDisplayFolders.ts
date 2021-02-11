@@ -1,15 +1,9 @@
 import { useEffect, useReducer} from "react"
 import { db } from "../firebase"
-import { Folder, FolderActionType, FolderData } from "../utils/types"
+import { Folder, FolderActionType, FolderData, ROOT_FOLDER } from "../utils/types"
 import { useAuth } from "./useAuth"
 
-const ROOT_FOLDER: FolderData = {
-    createdAt: null,
-    name: 'Root',
-    uid: null,
-    path: [],
-    parentId: null
-}
+
 
 const reducer = (state: any, {type, payload}: FolderActionType): Folder => {
     switch(type) {

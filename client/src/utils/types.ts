@@ -4,12 +4,24 @@ export type FirebaseUser = {
     user: firebase.User | null
 }
 
+export const ROOT_FOLDER: FolderData = {
+    createdAt: null,
+    name: 'Root',
+    uid: null,
+    path: [],
+    parentId: null
+}
+
+export interface Path {
+    id: string,
+    name: string
+}
 
 export type FolderData = {
     name: string | null,
     parentId: string | null,
     uid: string | null,
-    path: any[] | null,
+    path: Path[],
     createdAt: firebase.firestore.FieldValue | null
 }
 
