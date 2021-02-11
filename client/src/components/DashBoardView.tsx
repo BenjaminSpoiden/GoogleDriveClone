@@ -1,4 +1,4 @@
-import { Flex} from "@chakra-ui/react"
+import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure, Wrap } from "@chakra-ui/react"
 import React from "react"
 import { AddFile } from "./AddFile"
 import { AddFolder } from "./AddFolder"
@@ -6,7 +6,7 @@ import { Container } from "./Container"
 import { Navbar } from "./Navbar"
 import { FolderBreadCrumbs } from "./FolderBreadcrumbs"
 import { FolderData } from "../utils/types"
-import { Head } from "next/document"
+import Dropzone from "react-dropzone"
 
 interface DashBoardViewProps {
     currentFolder: FolderData | null
@@ -15,19 +15,24 @@ interface DashBoardViewProps {
 
 export const DashBoardView: React.FC<DashBoardViewProps> = ({children, currentFolder}) => {
 
+
+    const { onClose } = useDisclosure()
+
     return (
         <>
             <Container minH="100vh">
                 <Navbar />
                 <Flex px={4} w="100%" mx="auto" justify="flex-start" >
                     <AddFolder currentFolder={currentFolder}/>
-                    <AddFile />
+                    <AddFile currentFolder={currentFolder} />
                 </Flex>
                 <Flex p={4} w="100%" mx="auto" justify="flex-start" >
                     <FolderBreadCrumbs currentFolder={currentFolder}/>
                 </Flex>
-                <Flex>
-                    {children}
+                <Flex p={4} w="100%">
+                    <Wrap spacing={4} justify="center">
+                        {children}
+                    </Wrap>
                 </Flex>
             </Container>
         </>

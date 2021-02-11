@@ -12,6 +12,7 @@ export const ROOT_FOLDER: FolderData = {
     parentId: null
 }
 
+
 export interface Path {
     id: string,
     name: string
@@ -22,6 +23,14 @@ export type FolderData = {
     parentId: string | null,
     uid: string | null,
     path: Path[],
+    createdAt: firebase.firestore.FieldValue | null
+}
+
+export type FileData = {
+    url: string | null,
+    name: string | null,
+    folderId: string | null,
+    uid: string | null,
     createdAt: firebase.firestore.FieldValue | null
 }
 

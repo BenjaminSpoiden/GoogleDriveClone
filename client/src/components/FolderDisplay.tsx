@@ -10,7 +10,13 @@ export const FolderDisplay = ({item}: FolderProps) => {
            {/* @ts-ignore */}
             <NextLink href={`/dashboard/folder/${item?.id}`} passHref >
                 <LinkOverlay>
-                    <Button maxW="250px" leftIcon={<MdFolder />} fontWeight="bold" size="lg" variant="outline" colorScheme="blackAlpha" >
+                    <Button 
+                        w="300px" 
+                        leftIcon={<MdFolder />} 
+                        fontWeight="bold" size="lg" 
+                        variant="solid"
+                        colorScheme="gray" 
+                    >
                         <Text isTruncated >{item?.name}</Text>
                     </Button>
                 </LinkOverlay>

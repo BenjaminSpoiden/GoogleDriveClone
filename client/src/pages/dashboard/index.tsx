@@ -1,3 +1,4 @@
+import { WrapItem } from "@chakra-ui/react"
 import Head from "next/head"
 import React from "react"
 import { DashBoardView } from "../../components/DashBoardView"
@@ -19,12 +20,15 @@ const Dashboard = () => {
             <DashBoardView currentFolder={folder}>
                 {childFolders && childFolders.length > 0 ? (
                     //@ts-ignore
-                    childFolders.map((childFolder) => <FolderDisplay key={childFolder.id} item={childFolder} />)
+                    childFolders.map((childFolder) => (
+                        <WrapItem>
+                            <FolderDisplay key={childFolder.id} item={childFolder} />
+                        </WrapItem>
+                    ))
                 ) : null}
             </DashBoardView>
         </>
     )
 }
-
 
 export default Dashboard
