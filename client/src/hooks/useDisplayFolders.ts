@@ -5,7 +5,7 @@ import { useAuth } from "./useAuth"
 
 
 
-const reducer = (state: any, {type, payload}: FolderActionType): Folder => {
+const reducer = (state: Folder, {type, payload}: FolderActionType): Folder => {
     switch(type) {
         case 'select-folder': {
             return {
@@ -26,6 +26,12 @@ const reducer = (state: any, {type, payload}: FolderActionType): Folder => {
             return {
                 ...state,
                 childFolders: payload.childFolders
+            }
+        }
+        case 'set-child-files': {
+            return {
+                ...state,
+                childFiles: payload.childFiles
             }
         }
         default: {
@@ -107,6 +113,23 @@ export const useDisplayFolders = (folderId: string | null, folder: FolderData | 
                     }
                 })
             })
+    }, [folderId, user])
+
+    useEffect(() => {   
+        if(user)
+            return db.files
+                .where("folderId", "==", folderId)
+                .where("uid", "==", user.uid)
+                .orderBy("createdAt")
+                .onSnapshot(querySnapshot => {
+                    dispatch({
+                        type: "set-child-files",
+                        //@ts-ignore
+                        payload: {
+                            childFiles: querySnapshot.docs.map(doc => db.formatDocument(doc))
+                        }
+                    })
+                })
     }, [folderId, user])
 
     return state

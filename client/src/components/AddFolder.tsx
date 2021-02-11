@@ -1,4 +1,4 @@
-import { Button, Flex, IconButton, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { Button, Flex, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { useState } from "react"
 import { MdCreateNewFolder } from "react-icons/md"
 import { db } from "../firebase"

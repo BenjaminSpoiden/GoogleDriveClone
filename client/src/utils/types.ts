@@ -40,7 +40,7 @@ export interface Folder {
     folderId: string | null, 
     folder: FolderData | null,
     childFolders: FolderData[] | null,
-    childFiles: any[] | null
+    childFiles: FileData[] | null
 }
 
 export interface FolderState {

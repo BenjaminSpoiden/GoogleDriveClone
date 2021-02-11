@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react"
-import { Flex, Portal, Progress } from "@chakra-ui/react"
+import React, { useState } from "react"
+import { Button, Portal, Progress } from "@chakra-ui/react"
 import { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { db, storage } from "../firebase"
@@ -7,10 +7,11 @@ import { FolderData, ROOT_FOLDER } from "../utils/types"
 import { useIsAuth } from "../hooks/useIsAuth"
 import { addNewFile } from "../firebase/FolderFunctions"
 import { v4 } from "uuid"
+import { MdFileUpload } from "react-icons/md"
+
 
 interface UploadProps {
-    currentFolder: FolderData | null;
-    onClose: () => void
+    currentFolder: FolderData | null
 }
 
 type UploadFile = {
@@ -20,19 +21,11 @@ type UploadFile = {
     error: boolean
 }
 
-const UploadBox: React.FC = ({children}) => {
-    return (
-        <Flex p={4} borderRadius="md" borderStyle="dashed" borderColor="black" borderWidth="1px" justify="center" align="center">
-            {children}
-        </Flex>
-    )
-}
-
-export const Upload = ({ currentFolder, onClose }: UploadProps) => {
+export const Upload = ({ currentFolder }: UploadProps) => {
 
     const {user} = useIsAuth()
     const [uploadFilesData, setUploadFilesData] = useState<UploadFile[]>([])
-    
+
     const onDrop = useCallback((acceptedFiles) => {
         if(user === null || currentFolder === null) return
         const file = acceptedFiles[0]
@@ -76,12 +69,11 @@ export const Upload = ({ currentFolder, onClose }: UploadProps) => {
             },
             () => {
                 setUploadFilesData(value => {
-                    return value.filter(uploadedFile => {
+                    return value.filter((uploadedFile) => {
                         return uploadedFile.id !== id
                     })
                 })
-                console.log("finished")
-                onClose()
+
                 upload
                 .snapshot
                 .ref
@@ -114,35 +106,37 @@ export const Upload = ({ currentFolder, onClose }: UploadProps) => {
         )
     }, [])
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop })
-
-    console.log(uploadFilesData)
+    const {getRootProps, getInputProps} = useDropzone({ onDrop })
 
     return (
         <>
             <div {...getRootProps()} >  
-                <input {...getInputProps()} /> 
-                { isDragActive 
-                    ?   <UploadBox>
-                            Drop them here
-                        </UploadBox>
-                    :   <UploadBox>
-                            Click or Drag your files here
-                        </UploadBox>
-                }
+                <input placeholder="test" {...getInputProps()} />
+                <Button 
+                    aria-label="add-file"
+                    leftIcon={<MdFileUpload />}
+                    colorScheme="whatsapp"
+                    ml={2}
+                >
+                    Upload new File
+                </Button>
             </div>
             {uploadFilesData.length > 0 && (
-                <Portal >
-                    {uploadFilesData.map(uploadFile => (
-                        <Progress 
-                            size="md"
-                            value={uploadFile.progress}
-                            colorScheme={uploadFile.error ? "red" : "teal"}
-                            pos="absolute"
-                            w="100%"
-                            bottom="0"
-                        />
-                    ))}
+                <Portal>
+                        {uploadFilesData.map(uploadFile => {
+                            return (
+                                <>
+                                    <Progress 
+                                        size="md"
+                                        value={uploadFile.progress}
+                                        colorScheme={uploadFile.error ? "red" : "teal"}
+                                        pos="absolute"
+                                        w="100%"
+                                        bottom="0"
+                                    />
+                                </>
+                            )
+                        })}
                 </Portal>
             )}
         </>

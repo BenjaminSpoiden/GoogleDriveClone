@@ -11,7 +11,8 @@ export const FolderDisplay = ({item}: FolderProps) => {
             <NextLink href={`/dashboard/folder/${item?.id}`} passHref >
                 <LinkOverlay>
                     <Button 
-                        w="300px" 
+                        maxW="250px" 
+                        w="100%"
                         leftIcon={<MdFolder />} 
                         fontWeight="bold" size="lg" 
                         variant="solid"
