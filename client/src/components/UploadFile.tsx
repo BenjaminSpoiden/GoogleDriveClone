@@ -28,7 +28,7 @@ export const Upload = ({ currentFolder }: UploadProps) => {
     const {user} = useIsAuth()
     const [uploadFilesData, setUploadFilesData] = useState<UploadFile[]>([])
 
-    const onDrop = useCallback((acceptedFiles) => {
+    const onDrop = (acceptedFiles: any) => {
         if(user === null || currentFolder === null) return
         const file = acceptedFiles[0]
         const id = v4()
@@ -85,6 +85,7 @@ export const Upload = ({ currentFolder }: UploadProps) => {
                 .then(url => {
                     db.files
                         .where("uid", "==", user.uid)
+                        //@ts-ignore
                         .where("folderId", "==", currentFolder === ROOT_FOLDER ? null : currentFolder.id)
                         .where("name", "==", file.name)
                         .get()
@@ -99,6 +100,7 @@ export const Upload = ({ currentFolder }: UploadProps) => {
                                     name: file.name,
                                     uid: user.uid,
                                     size: file.size,
+                                    //@ts-ignore
                                     folderId: currentFolder === ROOT_FOLDER ? null : currentFolder.id,
                                     createdAt: db.getCurentTimestamp
                                 })  
@@ -110,7 +112,7 @@ export const Upload = ({ currentFolder }: UploadProps) => {
                 })
             }
         )
-    }, [user])
+    }
 
     const {getRootProps, getInputProps} = useDropzone({ onDrop })
 

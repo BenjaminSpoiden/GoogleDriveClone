@@ -1,4 +1,4 @@
-import { Divider, Center, Heading, SimpleGrid, Wrap, WrapItem, Flex } from "@chakra-ui/react"
+import { Divider, Center, Heading, SimpleGrid } from "@chakra-ui/react"
 import Head from "next/head"
 import React from "react"
 import { DashBoardView } from "../../components/DashBoardView"
@@ -24,7 +24,10 @@ const Dashboard = () => {
                         <Heading mb={2} size="sm" as="h5" textTransform="uppercase" >Folders</Heading>
                         <SimpleGrid columns={[1, 2, 3, 5, 6, 7]} spacing={4} >
                             {childFolders.map((childFolder) => (
-                                <FolderDisplay key={childFolder.id} item={childFolder} />
+                                <FolderDisplay 
+                                    //@ts-ignore
+                                    key={childFolder.id} 
+                                    item={childFolder} />
                             
                             ))}
                         </SimpleGrid>
@@ -40,7 +43,11 @@ const Dashboard = () => {
                         <Heading mb={2} size="sm" as="h5" textTransform="uppercase">Files</Heading>
                         <SimpleGrid columns={[1, 2, 3, 5, 6, 7]} spacing={4}>
                             {childFiles.map(childFile => (
-                                <FileDisplay key={childFile.id} item={childFile} />
+                                <FileDisplay 
+                                    //@ts-ignore
+                                    key={childFile.id} 
+                                    item={childFile} 
+                                />
                             ))}
                         </SimpleGrid>
                     </>
