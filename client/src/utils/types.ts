@@ -31,6 +31,8 @@ export type FileData = {
     name: string | null,
     folderId: string | null,
     uid: string | null,
+    type: string | null,
+    size: number | null, 
     createdAt: firebase.firestore.FieldValue | null
 }
 

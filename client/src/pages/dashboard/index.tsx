@@ -22,9 +22,12 @@ const Dashboard = () => {
                 {childFolders && childFolders.length > 0 ? (
                     <>
                         <Heading mb={2} size="sm" as="h5" textTransform="uppercase" >Folders</Heading>
-                        <SimpleGrid columns={[1, 2, 3, 5, 7]} spacing={4} >
+                        <SimpleGrid columns={[1, 2, 3, 5, 6, 7]} spacing={4} >
                             {childFolders.map((childFolder) => (
-                                <FolderDisplay key={childFolder.id} item={childFolder} />
+                                <FolderDisplay 
+                                    //@ts-ignore
+                                    key={childFolder.id} 
+                                    item={childFolder} />
                             
                             ))}
                         </SimpleGrid>
@@ -38,9 +41,13 @@ const Dashboard = () => {
                 {childFiles && childFiles.length > 0 ? (
                     <>
                         <Heading mb={2} size="sm" as="h5" textTransform="uppercase">Files</Heading>
-                        <SimpleGrid columns={[1, 2, 3, 5, 7]} spacing={4}  >
+                        <SimpleGrid columns={[1, 2, 3, 5, 6, 7]} spacing={4}>
                             {childFiles.map(childFile => (
-                                <FileDisplay key={childFile.id} item={childFile} />
+                                <FileDisplay 
+                                    //@ts-ignore
+                                    key={childFile.id} 
+                                    item={childFile} 
+                                />
                             ))}
                         </SimpleGrid>
                     </>

@@ -1,0 +1,11 @@
+[
+    {
+      "origin": ["http://localhost:3000"],
+      "responseHeaders": [
+          "Content-Type",
+          "Access-Control-Allow-Credentials"
+        ],
+      "method": ["GET"],
+      "maxAgeSeconds": 3600
+    }
+]
