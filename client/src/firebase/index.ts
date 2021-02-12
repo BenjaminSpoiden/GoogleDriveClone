@@ -10,6 +10,7 @@ const firestore = firebase.firestore()
 export const db = {
     folders: firestore.collection('folders'),
     files: firestore.collection('files'),
+    user: firestore.collection('users'),
     getCurentTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
     formatDocument: (doc: any) => {
         return {
