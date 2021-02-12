@@ -18,7 +18,9 @@ type UploadFile = {
     id: string,
     name: string,
     progress: number,
-    error: boolean
+    error: boolean,
+    type: string,
+    size: number
 }
 
 export const Upload = ({ currentFolder }: UploadProps) => {
@@ -31,9 +33,11 @@ export const Upload = ({ currentFolder }: UploadProps) => {
         const file = acceptedFiles[0]
         const id = v4()
         
+        console.log("file: ", file)
+
         setUploadFilesData(value => [
             ...value,
-            {id, name: file.name, progress: 0, error: false}
+            {id, name: file.name, progress: 0, error: false, type: file.type, size: file.size}
         ])
         
 
@@ -91,8 +95,10 @@ export const Upload = ({ currentFolder }: UploadProps) => {
                             } else {
                                 addNewFile({
                                     url, 
+                                    type: file.type,
                                     name: file.name,
                                     uid: user.uid,
+                                    size: file.size,
                                     folderId: currentFolder === ROOT_FOLDER ? null : currentFolder.id,
                                     createdAt: db.getCurentTimestamp
                                 })  
@@ -104,14 +110,14 @@ export const Upload = ({ currentFolder }: UploadProps) => {
                 })
             }
         )
-    }, [])
+    }, [user])
 
     const {getRootProps, getInputProps} = useDropzone({ onDrop })
 
     return (
         <>
             <div {...getRootProps()} >  
-                <input placeholder="test" {...getInputProps()} />
+                <input {...getInputProps()} />
                 <Button 
                     aria-label="add-file"
                     leftIcon={<MdFileUpload />}
