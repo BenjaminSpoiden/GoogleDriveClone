@@ -1,6 +1,6 @@
 import { Avatar, Button, Center, Divider, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useDropzone } from "react-dropzone";
 import { FaTrash, FaUserCheck } from "react-icons/fa";
 import { Container } from "../../components/Container"
@@ -14,15 +14,15 @@ import { useIsAuth } from "../../hooks/useIsAuth";
 const ProfileIndex = () => {
 
     const { user } = useIsAuth()
-
-    const onDrop = useCallback((files) => {
+    
+    const onDrop = (files: any) => {
         if(user === null) return
         const file = files[0]
         console.log(file)
 
         const uploadTask = storage.ref(`avatar/${user.uid}`).put(file)
 
-        uploadTask.on("state_chaned", 
+        uploadTask.on("state_changed", 
         (_) => {
             
         },
@@ -41,11 +41,10 @@ const ProfileIndex = () => {
                     .then(value => console.log(value))
                     .catch(error => console.log(error))
                 })
-                .catch(error => console.log(error))
-                
+                .catch(error => console.log(error))   
         })
 
-    }, [])
+    }
 
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
