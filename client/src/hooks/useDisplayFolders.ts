@@ -1,52 +1,16 @@
 import { useEffect, useReducer} from "react"
 import { db } from "../firebase"
 import { FolderData } from "../model/FolderData"
-import { FolderActionType } from "../redux/types/FolderTypes"
-import { Folder, ROOT_FOLDER } from "../redux/utils"
+import { folderReducer } from "../redux/reducers/FolderReducer"
+import { ROOT_FOLDER } from "../redux/utils"
 import { useAuth } from "./useAuth"
 
-
-const reducer = (state: Folder, {type, payload}: FolderActionType): Folder => {
-    switch(type) {
-        case 'select-folder': {
-            return {
-                folderId: payload.folderId,
-                folder: payload.folder,
-                childFolders: [],
-                childFiles: []    
-            }
-        }
-        case 'update-folder': {
-            return {
-                ...state,
-                folder: payload.folder
-                
-            }
-        }
-        case 'set-child-folders': {
-            return {
-                ...state,
-                childFolders: payload.childFolders
-            }
-        }
-        case 'set-child-files': {
-            return {
-                ...state,
-                childFiles: payload.childFiles
-            }
-        }
-        default: {
-            return state
-        }
-    }
-    
-}
 
 export const useDisplayFolders = (folderId: string | null, folder: FolderData | null = null) => {
 
     const {user} = useAuth()
 
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, dispatch] = useReducer(folderReducer, {
         folderId,
         folder,
         childFolders: [],

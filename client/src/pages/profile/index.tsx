@@ -4,11 +4,13 @@ import React from "react";
 import { useDropzone } from "react-dropzone";
 import { FaTrash, FaUserCheck } from "react-icons/fa";
 import { Container } from "../../components/Container"
+import { DropdownMenu } from "../../components/DropdownMenu";
 import { InputField } from "../../components/InputField";
 import { Navbar } from "../../components/Navbar";
 import { Wrapper } from "../../components/Wrapper";
 import { storage } from "../../firebase";
 import { useIsAuth } from "../../hooks/useIsAuth";
+import { Gender } from "../../model/Gender";
 
 
 const ProfileIndex = () => {
@@ -84,17 +86,20 @@ const ProfileIndex = () => {
                     </Heading>
                     <Formik
                         initialValues={{
-                            firstName: "",
+                            firstName: "", 
                             lastName: "",
-                            birthday: ""
+                            birthday: "",
+                            gender: "",
+                            couille: ""
                         }}
                         onSubmit={async(values) => {
-                            await user?.updateProfile({
-                                displayName: `${values.firstName} ${values.lastName}`
-                            })
+                            // await user?.updateProfile({
+                            //     displayName: `${values.firstName} ${values.lastName}`
+                            // })
+                            console.log(values)
                         }}
                     >
-                        {({isSubmitting}) => (
+                        {({isSubmitting, handleChange}) => (
                             <Form>
                                 <SimpleGrid columns={2} gap={4} >
                                     <InputField
@@ -118,6 +123,18 @@ const ProfileIndex = () => {
                                     label="Birthday"
                                     variant="flushed"
                                     type="date"
+                                />
+                                <DropdownMenu 
+                                    id="gender"
+                                    name="Gender"
+                                    placeholder="Select your gender"
+                                    dropdownItems={[
+                                        Gender.MALE,
+                                        Gender.FEMALE,
+                                        Gender.UNKNOWN
+                                    ]}
+                                    variant="flushed"
+                                    onChange={handleChange}
                                 />
                                 <Flex justify="flex-end" p={4} >
                                     <Button type="submit" isLoading={isSubmitting} colorScheme="whatsapp" leftIcon={<FaUserCheck />} >Change info</Button>
