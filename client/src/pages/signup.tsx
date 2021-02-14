@@ -1,6 +1,6 @@
 import { Flex, Heading, Button, Text, useToast } from "@chakra-ui/react"
 import { Formik, Form } from "formik"
-import React from "react"
+import React, { useState } from "react"
 import { Container } from "../components/Container"
 import { InputField } from "../components/InputField"
 import { Wrapper } from "../components/Wrapper"
@@ -8,14 +8,34 @@ import NextLink from "next/link"
 import { onSignUp } from "../firebase/AuthFunctions"
 import { SignupValidationSchema } from "../utils/SchemaValidator"
 import { useRouter } from "next/dist/client/router"
+import { Stepper } from "../components/Stepper"
+import { FaBuffer, FaMoneyCheck, FaUserPlus } from "react-icons/fa"
 
 
 const Signup = () => {
 
     const {push} = useRouter()
     const toast = useToast()
+
+    const [currentStep, setCurrentStep] = useState(1)
+
+    const steps: string[] = [
+        "Create an account",
+        "Choose your plan",
+        "Payment information"
+    ]
+
     return (
         <Container minH="100vh" >
+            <Stepper 
+                steps={steps} 
+                currentStep={currentStep} 
+                icons={[
+                    <FaUserPlus />,
+                    <FaBuffer />,
+                    <FaMoneyCheck />
+                ]}
+            />
             <Wrapper >
                 <Flex p={4} flexDir="column" m="auto" w="100%" >
                     <Heading size="lg" colorScheme="gray" textTransform="uppercase" >Signup</Heading>
