@@ -21,6 +21,7 @@ interface CreditCardProps {
     cardCVV: string
 }
 
+
 const ProfileIndex = () => {
 
     const { user } = useIsAuth()
@@ -165,6 +166,7 @@ const ProfileIndex = () => {
                                 })
                             }
                             console.log(values)
+                            
                         }}
                         initialValues={{
                             cardNumber: "",
