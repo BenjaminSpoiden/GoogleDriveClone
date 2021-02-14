@@ -6,7 +6,7 @@ type DropdownMenuProps = SelectProps & InputHTMLAttributes<HTMLInputElement> &{
     id: string,
     name: string,
     placeholder: string,
-    dropdownItems: string[]
+    dropdownItems: any[]
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({id, placeholder, dropdownItems, ...props}) => {

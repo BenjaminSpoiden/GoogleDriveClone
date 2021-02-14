@@ -11,7 +11,15 @@ import { Wrapper } from "../../components/Wrapper";
 import { storage } from "../../firebase";
 import { useIsAuth } from "../../hooks/useIsAuth";
 import { Gender } from "../../model/Gender";
+import validator from "validator"
 
+interface CreditCardProps {
+    cardNumber: string,
+    cardHolder: string,
+    cardYear: string,
+    cardMonth: string,
+    cardCVV: string
+}
 
 const ProfileIndex = () => {
 
@@ -96,6 +104,7 @@ const ProfileIndex = () => {
                             // await user?.updateProfile({
                             //     displayName: `${values.firstName} ${values.lastName}`
                             // })
+                            
                             console.log(values)
                         }}
                     >
@@ -138,6 +147,95 @@ const ProfileIndex = () => {
                                 />
                                 <Flex justify="flex-end" p={4} >
                                     <Button type="submit" isLoading={isSubmitting} colorScheme="whatsapp" leftIcon={<FaUserCheck />} >Change info</Button>
+                                </Flex>
+                            </Form>
+                        )}
+                    </Formik>
+                    <Center>
+                        <Divider m={4} borderWidth="2px" maxW="250px"/>
+                    </Center>
+                    <Heading as="h5" size="sm" textTransform="uppercase">
+                        Billing informations
+                    </Heading>
+                    <Formik<CreditCardProps>
+                        onSubmit={(values, {setErrors}) => {
+                            if(!validator.isCreditCard(values.cardNumber)) {
+                                setErrors({
+                                    cardNumber: "Invalid Credit Card Number"
+                                })
+                            }
+                            console.log(values)
+                        }}
+                        initialValues={{
+                            cardNumber: "",
+                            cardHolder: "",
+                            cardMonth: "",
+                            cardYear: "",
+                            cardCVV: ""
+                        }}
+                    >
+                        {({values, isSubmitting, handleChange}) => (
+                            <Form>
+                                <InputField 
+                                    name="cardNumber"
+                                    label="Credit Card Number"
+                                    placeholder="Enter your credit card number"
+                                    type="tel"
+                                    value={values.cardNumber.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim()}
+                                    onChange={handleChange}
+                                    maxLength={19}
+                                    variant="flushed"
+                                />
+                              
+                                <InputField 
+                                    name="cardHolder"
+                                    label="Card Holder Name"
+                                    placeholder="Enter the name of the credit card owner"
+                                    type="text"
+                                    variant="flushed"
+                                />
+                                <SimpleGrid columns={3} gap={4} >
+                                    <DropdownMenu 
+                                        id="cardMonth"
+                                        name="Month"
+                                        placeholder="Month"
+                                        onChange={handleChange}
+                                        variant="flushed"
+                                        dropdownItems={[
+                                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+                                        ]}
+                                    />
+                                    <DropdownMenu 
+                                        id="cardYear"
+                                        name="Year"
+                                        variant="flushed"
+                                        onChange={handleChange}
+                                        placeholder="Year"
+                                        dropdownItems={[
+                                            2020,
+                                            2021,
+                                            2023,
+                                            2024,
+                                            2025,
+                                            2026,
+                                            2027,
+                                            2028,
+                                            2029,
+                                            2030,
+                                            2031,
+                                            2032
+                                        ]}
+                                    />
+                                    <InputField 
+                                        name="cardCVV"
+                                        label="CVV"
+                                        placeholder="CVV"
+                                        maxLength={3}
+                                        variant="flushed"
+                                    />
+                                </SimpleGrid>
+                                <Flex justify="flex-end" p={4} >
+                                    <Button type="submit" isLoading={isSubmitting} colorScheme="whatsapp" leftIcon={<FaUserCheck />}>Change billing info</Button>
                                 </Flex>
                             </Form>
                         )}
