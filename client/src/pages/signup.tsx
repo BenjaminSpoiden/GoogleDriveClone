@@ -192,7 +192,8 @@ const Signup = () => {
                                                         variant="flushed"
                                                     />
                                                 </SimpleGrid>
-                                                <Flex justify="space-between" mt={4}>
+                                                {(form as FormikProps<UserDataProps>).values.cards.length - 1 === index 
+                                                    ? <Flex justify="space-between" mt={4}>
                                                         <Button 
                                                             rightIcon={<FaIdCard />} 
                                                             size="sm" 
@@ -214,7 +215,9 @@ const Signup = () => {
                                                             onClick={() => remove(index)}>
                                                             Delete Card
                                                         </Button>
-                                                </Flex>
+                                                    </Flex> 
+                                                    : null
+                                                }
                                             </>
                                         ))}
                                     </>
