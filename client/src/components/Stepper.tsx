@@ -18,18 +18,17 @@ interface StepState {
 export const Stepper: React.FC<StepperProps> = ({steps, currentStep, icons}) => {
 
     const [stepObject, setStepObject] = useState<StepState[]>([])
-    const arrayStep = currentStep - 1
 
     useEffect(() => {
         setStepObject(steps.map((step, index) => {
             return {
                 desc: step,
-                completed: index < arrayStep ? true : false,
-                selected: index === arrayStep ? true : false,
+                completed: index < currentStep ? true : false,
+                selected: index === currentStep ? true : false,
                 icon: icons[index]
             }
         }))
-    }, [arrayStep])
+    }, [currentStep])
 
     return (
         <>
@@ -67,12 +66,6 @@ export const Stepper: React.FC<StepperProps> = ({steps, currentStep, icons}) => 
                     ))
                 }
             </Stack>
-            {/* <Button onClick={() => {
-                setPosition(c => c += 1)
-            }} >Next</Button>
-            <Button onClick={() => {
-                setPosition(c => c -= 1)
-            }} >Prev</Button> */}
         </>
     )
 
