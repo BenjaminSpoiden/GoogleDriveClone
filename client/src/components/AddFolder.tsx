@@ -4,7 +4,9 @@ import { MdCreateNewFolder } from "react-icons/md"
 import { db } from "../firebase"
 import { addNewFolder } from "../firebase/FolderFunctions"
 import { useIsAuth } from "../hooks/useIsAuth"
-import { FolderData, Path, ROOT_FOLDER } from "../utils/types"
+import { FolderData } from "../model/FolderData"
+import { Path } from "../model/Path"
+import { ROOT_FOLDER } from "../redux/utils"
 
 interface AddFolderProps {
     currentFolder: FolderData | null

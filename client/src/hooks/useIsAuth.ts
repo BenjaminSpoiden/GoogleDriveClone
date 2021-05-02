@@ -10,7 +10,7 @@ export const useIsAuth = () => {
 
      useEffect(() => {
         if(!user && !loading) {
-            router.replace("/")
+            router.replace("/login")
         }
     }, [user, loading])
 

@@ -12,6 +12,7 @@ import { storage } from "../../firebase";
 import { useIsAuth } from "../../hooks/useIsAuth";
 import { Gender } from "../../model/Gender";
 import validator from "validator"
+import Head from "next/head";
 
 interface CreditCardProps {
     cardNumber: string,
@@ -61,6 +62,10 @@ const ProfileIndex = () => {
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
     return (
+        <>
+        <Head>
+            <title>Profile</title>
+        </Head>
         <Container minH="100vh">
             <Navbar />
             <Wrapper variant="regular">
@@ -102,9 +107,9 @@ const ProfileIndex = () => {
                             couille: ""
                         }}
                         onSubmit={async(values) => {
-                            // await user?.updateProfile({
-                            //     displayName: `${values.firstName} ${values.lastName}`
-                            // })
+                            await user?.updateProfile({
+                                displayName: `${values.firstName} ${values.lastName}`
+                            })
                             
                             console.log(values)
                         }}
@@ -245,6 +250,7 @@ const ProfileIndex = () => {
                 </Flex>
             </Wrapper>
         </Container>
+        </>
     )
 }
 

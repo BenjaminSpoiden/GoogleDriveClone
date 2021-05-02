@@ -1,42 +1,72 @@
-import { SearchIcon } from "@chakra-ui/icons"
-import { Flex, IconButton, Progress, useNumberInput, Text, Stack } from "@chakra-ui/react"
-import React from "react"
+import { CheckIcon } from "@chakra-ui/icons"
+import { Flex, IconButton, Text, Stack, Divider } from "@chakra-ui/react"
+import React, { useEffect, useState } from "react"
 
+interface StepperProps {
+    steps: string[],
+    currentStep: number;
+    icons: JSX.Element[]
+}
 
-export const Stepper = () => {
+interface StepState {
+    desc: string,
+    completed: boolean,
+    selected: boolean,
+    icon: JSX.Element
+}
 
-    const {getInputProps, getIncrementButtonProps, getDecrementButtonProps} = useNumberInput({
-        step: 1,
-        defaultValue: 0,
-        min: 1,
-        max: 3
-    })
+export const Stepper: React.FC<StepperProps> = ({steps, currentStep, icons}) => {
 
-    const increment = getIncrementButtonProps()
-    const decrement = getDecrementButtonProps()
-   
-    
+    const [stepObject, setStepObject] = useState<StepState[]>([])
+
+    useEffect(() => {
+        setStepObject(steps.map((step, index) => {
+            return {
+                desc: step,
+                completed: index < currentStep ? true : false,
+                selected: index === currentStep ? true : false,
+                icon: icons[index]
+            }
+        }))
+    }, [currentStep])
+
     return (
-        <Stack direction="row">
-            <Flex flexDir="column" justify="center" align="center">
-                <IconButton w="40px" aria-label="Search database" icon={<SearchIcon />} />
-                <Text fontSize="xs">Account</Text>
-            </Flex> 
+        <>
+            <Stack px={4} d="flex" maxW="768px" w="100%" justify="space-between" align="center" direction={["column", "column","row"]}>
+                {
+                    stepObject.map((stepElement, index) => (
+                        <>
+                            <Flex w="auto" flexDir="column" justify="center" align="center">
+                                <IconButton 
+                                    borderRadius="full" 
+                                    mt={4} 
+                                    w="40px" 
+                                    aria-label="Search database" 
+                                    icon={stepElement.completed ? <CheckIcon /> : stepElement.icon}
+                                    colorScheme={stepElement.completed ? "whatsapp" : "gray" && stepElement.selected ? "whatsapp" : "gray"}
+                                    />
+                                <Text 
+                                    fontWeight={stepElement.selected ? "bold" : "normal"} 
+                                    textAlign="center" 
+                                    w="120px"
+                                    fontSize="xs">
+                                        {stepElement.desc}
+                                </Text>
+                            </Flex> 
 
-            <Progress w="250px" value={0} size="xs" colorScheme="pink" />
-
-            <Flex flexDir="column" justify="center" align="center">
-                <IconButton w="40px" aria-label="Search database" icon={<SearchIcon />} />
-                <Text fontSize="xs">Plans</Text>
-            </Flex> 
-
-            <Progress w="250px" value={0} size="xs" colorScheme="pink" />
-
-            <Flex flexDir="column" justify="center" align="center">
-                <IconButton w="40px" aria-label="Search database" icon={<SearchIcon />} />
-                <Text fontSize="xs">Resume</Text>
-            </Flex> 
-        </Stack>
+                            <Divider 
+                                d={index === stepObject.length -1 ? "none" : "flex"} 
+                                borderWidth="2px" 
+                                // maxW="250px"
+                                borderColor={stepElement.completed ? "whatsapp.500" : "gray.300"}
+                                // w="100%"
+                                borderStyle={stepElement.completed ? "solid" : "dashed"}
+                            />
+                        </>
+                    ))
+                }
+            </Stack>
+        </>
     )
 
 }

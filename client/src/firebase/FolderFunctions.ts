@@ -1,5 +1,7 @@
 import { db } from "."
-import { FileData, FolderData } from "../utils/types"
+import { FileData } from "../model/FileData"
+import { FolderData } from "../model/FolderData"
+
 
 
 export const addNewFolder = async (folderData: FolderData) => {
