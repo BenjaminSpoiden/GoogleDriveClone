@@ -7,12 +7,17 @@ import NextLink from "next/link"
 import { LoginValidationSchema } from "../utils/SchemaValidator"
 import { onSignIn } from "../firebase/AuthFunctions"
 import { useRouter } from "next/dist/client/router"
+import Head from "next/head"
 
 const Login = () => {
 
     const { push } = useRouter()
     const toast = useToast()
     return (
+        <>
+        <Head>
+            <title>Login</title>
+        </Head>
         <Container minH="100vh">
             <Wrapper>
                 <Flex p={4} flexDir="column" m="auto" w="100%" >
@@ -86,6 +91,7 @@ const Login = () => {
                 </Flex>
             </Wrapper>
         </Container>
+        </>
     )
 }
 

@@ -1,13 +1,13 @@
 import React, { useState } from "react"
 import { Button, Portal, Progress } from "@chakra-ui/react"
-import { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { db, storage } from "../firebase"
-import { FolderData, ROOT_FOLDER } from "../utils/types"
 import { useIsAuth } from "../hooks/useIsAuth"
 import { addNewFile } from "../firebase/FolderFunctions"
 import { v4 } from "uuid"
 import { MdFileUpload } from "react-icons/md"
+import { FolderData } from "../model/FolderData"
+import { ROOT_FOLDER } from "../redux/utils"
 
 
 interface UploadProps {

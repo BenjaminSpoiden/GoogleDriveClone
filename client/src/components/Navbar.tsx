@@ -15,7 +15,7 @@ export const Navbar = () => {
     return (
         <Flex h="80px" w="100%" mx="auto">
             <Flex w="100%" p={4} justify="space-between" m="auto" align="center">
-                <NextLink href="/dashboard"><Text cursor="pointer">Some App name</Text></NextLink>
+                <NextLink href="/dashboard"><Text cursor="pointer">GD Clone</Text></NextLink>
                 <Flex d={["none", "none", "flex"]} align="center" justify="space-between">
                     <Text fontSize="sm" fontWeight="bold" >Welcome, {`${user?.displayName}`}</Text>
 

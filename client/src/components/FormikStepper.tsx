@@ -1,17 +1,18 @@
 import { MdArrowBack, MdArrowForward, MdSend } from "react-icons/md"
 import { Button,  Flex } from "@chakra-ui/react"
-import { Form, Formik, FormikConfig, FormikValues } from "formik"
+import { Form, Formik, FormikConfig } from "formik"
 import React, { useState } from "react"
 import { Stepper } from "./Stepper"
+import { UserDataProps } from "../pages/signup"
 
-interface FormikStepperProps extends Pick<FormikConfig<FormikValues>, 'children' | 'validationSchema'> {
+interface FormikStepperProps<T> extends Pick<FormikConfig<T>, 'children' | 'validationSchema'> {
     label: string,
     icon: JSX.Element
 }
 
-export const FormikStepper: React.FC<FormikConfig<FormikValues>> = ({children, ...props}) => {
+export const FormikStepper: React.FC<FormikConfig<UserDataProps>> = ({children, ...props}) => {
 
-    const childrenArray = React.Children.toArray(children) as React.ReactElement<FormikStepperProps>[]
+    const childrenArray = React.Children.toArray(children) as React.ReactElement<FormikStepperProps<UserDataProps>>[]
     const [step, setStep] = useState(0)
     const currentChildren = childrenArray[step]
 
@@ -91,6 +92,6 @@ export const FormikStepper: React.FC<FormikConfig<FormikValues>> = ({children, .
     )
 }
 
-export const FormikStep: React.FC<FormikStepperProps> = ({children}) => {
+export const FormikStep: React.FC<FormikStepperProps<UserDataProps>> = ({children}) => {
     return <>{children}</>
 }

@@ -4,10 +4,10 @@ import { MdAudiotrack, MdFileDownload, MdPhoto, MdPictureAsPdf, MdVideoLibrary }
 import { AiFillFileText } from "react-icons/ai"
 import { HiChevronDoubleDown } from "react-icons/hi"
 import { FaFileWord } from "react-icons/fa"
-import { FileData } from "../utils/types";
 import PDFViewer from "pdf-viewer-reactjs"
 import dayjs from "dayjs";
 import { IconType } from "react-icons";
+import { FileData } from "../model/FileData";
 
 
 interface FileProps {
@@ -30,8 +30,7 @@ const FileDisplayOverlay: React.FC<FileProps & IconTypeProps > = ({children, ite
     // storage.ref(`files/${user?.uid}`).listAll().then(list => list.items.forEach(item => item.getMetadata().then(data => console.log(data))))
 
     //@ts-ignore
-    const formattedDate = dayjs(item?.createdAt?.seconds).format('MMMM D, YYYY h:mm A')
-
+    const formattedDate = dayjs(item?.createdAt?.toDate()).format('MMMM D, YYYY h:mm A')
     return (
         <Box justifySelf="center" h="310px" maxW="250px" w="100%" bgColor={colorMode === "light" ? "gray.200" : "gray.800"} borderColor="blue.400" overflow="hidden" borderRadius="md" borderWidth="1px" borderStyle="solid" >
             <Box mx='auto' h="250px" overflow="hidden" >
